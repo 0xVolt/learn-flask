@@ -10,24 +10,43 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
     - [1.3.2. Substituting the string for an html page](#132-substituting-the-string-for-an-html-page)
     - [1.3.3. Template Inheritance](#133-template-inheritance)
     - [1.3.4. Static content](#134-static-content)
+    - [1.3.5. Database connectivity](#135-database-connectivity)
+
+---
 
 ## 1.2. Checklist
+**Initialisation**
 - [X] Create a new directory to house the project.
 - [X] `cd` into the project dir.
 - [X] Type `virtualenv env` into the terminal to create a new virtual environment with the name `env`. This name can be anything but `env` is the convention. You should now see a new folder with the name you'd specified.
 - [X] Activate the venv using `env\Scripts\activate.ps1` on powershell or `env\Scripts\activate.bat` on cmd. You'll see the terminal prompt change to indicate you're in a venv.
 - [X] You can verify whether the venv is active by running `pip -V` and checking the path to the pip in use.
+
+**Installing dependencies**
 - [X] Install dependencies. `pip install flask flask-sqlalchemy` to install flask and it's dependencies in this venv.
+
+**Deploying app**
 - [X] Create a new file named `app.py` and run it using `py app.py` to deploy the app on your localhost.
+
+**Adding routes**
 - [X] Create folders named `static` and `templates`.
 - [X] Create `index.html` inside `templates`.
 - [X] Now, instead of returning a string in our app, we'll `return render_template(index.html)`.
 - [X] Create boilerplate html code in `index.html` and refresh the project.
+
+**Using template inheritance**
 - [X] Create a master html file to inherit from. 
 - [X] Inherit that file in `index.html`.
+
+**Adding css**
 - [X] Make a css folder.
 - [X] Create a `main.css` file with some basic rule sets.
 - [X] Link `main.css` to the master html file.
+
+**Adding database functionality**
+- [ ] Import `sqlalchemy`
+
+---
 
 ## 1.3. Notes
 Use these notes by reading the bit that corresponds to the step you're on in the checklist.
@@ -69,12 +88,12 @@ Use these notes by reading the bit that corresponds to the step you're on in the
 ### 1.3.4. Static content
 - In the static folder, make a new folder named css and create a file named `main.css`.
 - Put some basic rule sets in the `main.css` file for example,
-```css
-body {
-    margin: 0;
-    font-family: sans-serif;
-}
-```
+    ```css
+    body {
+        margin: 0;
+        font-family: sans-serif;
+    }
+    ```
 - This stylesheet now needs to be linked in the `base.html` master html file. However, the css file cannot directly be linked as a path. We gotta make use of more Jinja2 syntax. We link the stylesheet by doing the following,
   1. Importing the function `url_for()` from flask in our `app.py`. Our Flask import then becomes, 
         ```python 
@@ -85,4 +104,20 @@ body {
         <!-- Notice the use of single quotes within the double quotes -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         ```
+    When using `{{}}`, this makes sure that the return type of the arguments is a string. This is why it's used to slot in the path of a file in string form. 
 - The same applies if you were trying to link a JavaScript file. It would be `filename='js/main.js'` instead.
+
+### 1.3.5. Database connectivity
+- Import SQLAlchemy into the python app. The import statements now are,
+    ```py
+    from flask import Flask, render_template, url_for
+    from flask_sqlalchemy import SQLAlchemy
+    ```
+- We configure the app to check for a database that's using sqlite. We reference this using a relative path. This is what the code looks like,
+    ```py
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+    ```
+- Then, initialising the database,
+    ```py
+    db = SQLAlchemy(app)
+    ```
