@@ -11,6 +11,7 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
     - [1.3.3. Template Inheritance](#133-template-inheritance)
     - [1.3.4. Static content](#134-static-content)
     - [1.3.5. Database connectivity](#135-database-connectivity)
+    - [Creating the database model](#creating-the-database-model)
 
 ---
 
@@ -121,3 +122,32 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     ```py
     db = SQLAlchemy(app)
     ```
+### Creating the database model
+- Make a class to instantiate a database. Should look something like this,
+
+    ```py
+    class Model(db.model):
+        id = db.Column(db.Integer, primary_key=True)
+        # Making sure that the user doesn't leave this field empty
+        content = db.Column(db.String(200), nullable=False)
+        # Make sure to include the datetime library
+        # datetime.utcnow returns the current time
+        date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    ```
+- Each field of the class is a new attribute in the database.
+- Importing datetime looks like, 
+
+    ```py
+    from datetime import datetime
+    ```
+- In addition, define a function to return a string every time a new element is created. Like so,
+
+    ```py
+    # Creating a repr function to represent each task (object) as a string
+    def __repr__(self):
+        retString = 'Task #{}'.format(self.id)
+        
+        return retString
+    ```
+- In Python, `__repr__` is a special method used to represent a class’s objects as a string. `__repr__` is called by the repr() built-in function. You can define your own string representation of your class objects using the `__repr__` method.
+- [This](https://www.educative.io/answers/what-is-the-repr-method-in-python) is a good resource to learn about the `__repr__` method in Python. 
