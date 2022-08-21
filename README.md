@@ -1,6 +1,5 @@
 # 1. Learn Flask
 Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA) on YouTube, this log file was created to document progress on learning the Flask framework for backend web development in Python. 
-
 ## 1.1. Table of Contents
 - [1. Learn Flask](#1-learn-flask)
   - [1.1. Table of Contents](#11-table-of-contents)
@@ -11,7 +10,7 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
     - [1.3.3. Template Inheritance](#133-template-inheritance)
     - [1.3.4. Static content](#134-static-content)
     - [1.3.5. Database connectivity](#135-database-connectivity)
-    - [Creating the database model](#creating-the-database-model)
+    - [1.3.6. Creating the database model](#136-creating-the-database-model)
 
 ---
 
@@ -122,7 +121,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     ```py
     db = SQLAlchemy(app)
     ```
-### Creating the database model
+### 1.3.6. Creating the database model
 - Make a class to instantiate a database. Should look something like this,
 
     ```py
