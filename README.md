@@ -100,7 +100,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
         from flask import flask, render_template, url_for
         ```
   2. Link the stylesheet using
-        ```css
+        ```html
         <!-- Notice the use of single quotes within the double quotes -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         ```
