@@ -49,5 +49,19 @@ def index():
         return render_template('index.html', tasks=tasks)
         
 
+# By default, the method list consists of 'GET'
+@app.route('/delete/<int:id>')
+def delete(id):
+    taskToDelete = Model.query.get_or_404(id)
+    
+    try:
+        db.session.delete(taskToDelete)
+        db.session.commit()
+        
+        return redirect('/')
+    except:
+        return 'There was an issue deleting that task.'
+
+
 if __name__ == '__main__':
     app.run(debug=True)
