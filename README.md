@@ -11,6 +11,7 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
     - [1.3.4. Static content](#134-static-content)
     - [1.3.5. Database connectivity](#135-database-connectivity)
     - [1.3.6. Creating the database model](#136-creating-the-database-model)
+    - [Creating the database](#creating-the-database)
 
 ---
 
@@ -153,4 +154,16 @@ Use these notes by reading the bit that corresponds to the step you're on in the
         return retString
     ```
 - In Python, `__repr__` is a special method used to represent a class’s objects as a string. `__repr__` is called by the repr() built-in function. You can define your own string representation of your class objects using the `__repr__` method.
-- [This blog post](https://www.educative.io/answers/what-is-the-repr-method-in-python) is a good resource to learn about the `__repr__` method in Python. 
+- [This blog post](https://www.educative.io/answers/what-is-the-repr-method-in-python) is a good resource to learn about the `__repr__` method in Python.
+
+### Creating the database
+- Head to the terminal. Make sure your env is activated.
+- Start an interactive Python shell. Type in `python` or `py` to start up an interpreter prompt.
+- To create the database, type in, 
+```py
+1. from app import db
+2. db.create_all()
+```
+- The python script needs to be named `app.py` since we've initialised using the scripts name. 
+- On running the second command, a new `__pycache__` folder will be created along with our database element.
+- You no longer need the terminal since the database has been setup following the above steps.
