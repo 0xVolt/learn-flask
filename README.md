@@ -18,7 +18,8 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
     - [4.2. Creating a task](#42-creating-a-task)
       - [4.2.1. Programming the logic](#421-programming-the-logic)
       - [4.2.2. Putting it all together](#422-putting-it-all-together)
-    - [4.3. Making the table dynamic](#43-making-the-table-dynamic)
+    - [4.3. Making the table update dynamically](#43-making-the-table-update-dynamically)
+    - [Adding deletion functionality](#adding-deletion-functionality)
 
 ---
 
@@ -336,7 +337,7 @@ else:
     return render_template('index.html', tasks=tasks)
 ```
 
-### 4.3. Making the table dynamic
+### 4.3. Making the table update dynamically
 - Adding Jinja2 syntax to our table in `index.html` to show a row for each task in the database. We use a for loop to iterate through the tasks in the task list. This task list comes from the above code passing `tasks` to `render_template()`. 
 
 - The updated row dynamically becomes,
@@ -358,3 +359,5 @@ else:
     {% endfor %}
     ```
 - It was at this point that the `task.content` field refers to the `name` of the input and not the `id`.
+ 
+### Adding deletion functionality
