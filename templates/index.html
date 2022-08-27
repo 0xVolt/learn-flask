@@ -15,21 +15,26 @@
             <th>Added</th>
             <th>Actions</th>
         </tr>
-        <tr>
-            <!-- Create two empty rows -->
-            <td></td>
-            <td></td>
-            <td>
-                <!-- Create a link -->
-                <a href="">Delete</a>
-                <br>
-                <a href="">Update</a>
-            </td>
-        </tr>
+
+        {% for task in tasks %}
+            <tr>
+                <!-- First column for content of the task -->
+                <td>{{ task.content }}</td>
+                <!-- Second column for the date created -->
+                <!-- date() ensures that it's in the intended format without the time. This is because it's still a datetime object. -->
+                <td>{{ task.dateCreated.date() }}</td>
+                <td>
+                    <!-- Create a link -->
+                    <a href="">Delete</a>
+                    <br>
+                    <a href="">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
 
     <form action="/" method="POST">
-        <input type="text" name="Content" id="content">
+        <input type="text" name="content" id="content">
         <input type="submit" value="Add task">
     </form>
 </div>
