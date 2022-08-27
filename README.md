@@ -1,7 +1,6 @@
 # Learn Flask
 Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA) on YouTube, this log file was created to document progress on learning the Flask framework for backend web development in Python.
 
----
 ## 1. Table of Contents
 - [Learn Flask](#learn-flask)
   - [1. Table of Contents](#1-table-of-contents)
