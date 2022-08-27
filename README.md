@@ -13,6 +13,9 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
     - [1.3.6. Creating the database model](#136-creating-the-database-model)
     - [1.3.7. Creating the database](#137-creating-the-database)
   - [1.4. Creating the Task Master app](#14-creating-the-task-master-app)
+    - [Creating the basic layout](#creating-the-basic-layout)
+    - [Adding the logic to create a task](#adding-the-logic-to-create-a-task)
+      - [Breaking it down](#breaking-it-down)
 
 ---
 
@@ -181,6 +184,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
 - You no longer need the terminal since the database has been setup following the above steps.
 
 ## 1.4. Creating the Task Master app
+### Creating the basic layout
 - Write a new `index.html` file with a header and a table.
 - This is the basic structure of the table we're creating. 
     ```html
@@ -243,7 +247,42 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     @app.route('/', methods=['POST', 'GET'])
     def index():
         if request.method == 'POST':
+            # Does virtually nothing
             pass
         else:
             return render_template('index.html')
     ```
+### Adding the logic to create a task
+- Create a request variable and passing in the id of the input from the form. Then use that request variable to create a new object of the database model.
+- This object becomes our task which we will then push to the database.
+- The code implementing this logic looks like,
+```py
+# If the submit button on the form is pressed
+    if request.method == 'POST':
+        # Pass in the id of the input to extract
+        taskContent = request.form['content']
+        
+        # Create an object of the table having content as the extracted content above
+        newTask = Model(content=taskContent)
+        
+        # Pushing the new task created to the database
+        try:
+            # Look familiar? This code pushes data to our database
+            db.session.add(newTask)
+            db.session.commit()
+            
+            # Remember to import redirect back to the index page
+            return redirect('/')
+        except:
+            # This should never fail ideally
+            return 'There was an issue adding your task to the database.'
+    else:
+        # This looks at all the database contents and returns them in the order of their creation
+        tasks = Model.query.order_by(Model.dateCreated).all()
+        # tasks = Model.query.order_by(Model.dateCreated).first()
+        
+        # Passing the tasks variable into the render_template() function
+        return render_template('index.html', tasks=tasks)
+```
+#### Breaking it down
+- Extracting the data from the form in the table
