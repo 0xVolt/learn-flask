@@ -1,25 +1,29 @@
-# 1. Learn Flask
-Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA) on YouTube, this log file was created to document progress on learning the Flask framework for backend web development in Python. 
-## 1.1. Table of Contents
-- [1. Learn Flask](#1-learn-flask)
-  - [1.1. Table of Contents](#11-table-of-contents)
-  - [1.2. Checklist](#12-checklist)
-  - [1.3. Notes](#13-notes)
-    - [1.3.1. Virtual Environments](#131-virtual-environments)
-    - [1.3.2. Substituting the string for an html page](#132-substituting-the-string-for-an-html-page)
-    - [1.3.3. Template Inheritance](#133-template-inheritance)
-    - [1.3.4. Static content](#134-static-content)
-    - [1.3.5. Database connectivity](#135-database-connectivity)
-    - [1.3.6. Creating the database model](#136-creating-the-database-model)
-    - [1.3.7. Creating the database](#137-creating-the-database)
-  - [1.4. Creating the Task Master app](#14-creating-the-task-master-app)
-    - [Creating the basic layout](#creating-the-basic-layout)
-    - [Adding the logic to create a task](#adding-the-logic-to-create-a-task)
-      - [Breaking it down](#breaking-it-down)
+# Learn Flask
+Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA) on YouTube, this log file was created to document progress on learning the Flask framework for backend web development in Python.
+
+---
+## 1. Table of Contents
+- [Learn Flask](#learn-flask)
+  - [1. Table of Contents](#1-table-of-contents)
+  - [2. Checklist](#2-checklist)
+  - [3. Notes](#3-notes)
+    - [3.1. Virtual Environments](#31-virtual-environments)
+    - [3.2. Substituting the string for an html page](#32-substituting-the-string-for-an-html-page)
+    - [3.3. Template Inheritance](#33-template-inheritance)
+    - [3.4. Static content](#34-static-content)
+    - [3.5. Database connectivity](#35-database-connectivity)
+    - [3.6. Creating the database model](#36-creating-the-database-model)
+    - [3.7. Creating the database](#37-creating-the-database)
+  - [4. Creating the Task Master app](#4-creating-the-task-master-app)
+    - [4.1. Creating the basic layout](#41-creating-the-basic-layout)
+    - [4.2. Creating a task](#42-creating-a-task)
+      - [4.2.1. Programming the logic](#421-programming-the-logic)
+      - [4.2.2. Putting it all together](#422-putting-it-all-together)
+    - [4.3. Making the table dynamic](#43-making-the-table-dynamic)
 
 ---
 
-## 1.2. Checklist
+## 2. Checklist
 **Initialisation**
 - [X] Create a new directory to house the project.
 - [X] `cd` into the project dir.
@@ -54,34 +58,37 @@ Following along with this [tutorial](https://www.youtube.com/watch?v=Z1RJmh_OqeA
 - [X] Initialise database
 - [X] Create a database model using a class
 - [X] Ensure that an `__repr__` string is implemented through the class
-- [ ] Setup database using the py interpreter in the terminal
+- [X] Setup database using the py interpreter in the terminal
 
 **Build Task Master app**
-- [ ] Make separate `base.html`, `index.html`, `main.css` and `app.py` files for the project
-- [ ] Write `index.html`
-  - [ ] Create a div
-    - [ ] Add header and table
-    - [ ] Add links to the static row
-    - [ ] Add a form at the end after table
-- [ ] Edit `main.css` to format table
-- [ ] Write more logic in `app.py`
+- [X] Make separate `base.html`, `index.html`, `main.css` and `app.py` files for the project
+- [X] Write `index.html`
+  - [X] Create a div
+    - [X] Add header and table
+    - [X] Add links to the static row
+    - [X] Add a form at the end after table
+- [X] Edit `main.css` to format table
+- [X] Write more logic in `app.py`
+  - [X] Creation of tasks
+  - [ ] Deletion of tasks
+  - [ ] Updating tasks
 
 ---
 
-## 1.3. Notes
+## 3. Notes
 Use these notes by reading the bit that corresponds to the step you're on in the checklist.
-### 1.3.1. Virtual Environments
+### 3.1. Virtual Environments
 - All the packages needed for the project are located within this directory which makes the project more portable in a collaborative setting.
 - Requirements are installed into the working directory directly.
 - Virtual environments are the standard when it comes to collaborative projects due to the easy package management. 
 
-### 1.3.2. Substituting the string for an html page
+### 3.2. Substituting the string for an html page
 - Two folders needed to be created. One named static and the other, templates. 
 - In the templates folder, we create a file named `index.html`. 
 - By creating this file, we can now return a render of the html file it in our app when defining the route.
 - When specifying the name of the file to render, we need not specify the full path since Flask knows to look in the templates folder.
 
-### 1.3.3. Template Inheritance
+### 3.3. Template Inheritance
 - This is achieved by creating a master html page that is inherited into every other page so as to cut redundant code.
 - For this, create a new file in templates named `base.html`. This will be our skeleton. 
 - In this page, use Jinja2 syntax to create a block like so.
@@ -105,7 +112,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     {% endblock %}
 ```
 
-### 1.3.4. Static content
+### 3.4. Static content
 - In the static folder, make a new folder named css and create a file named `main.css`.
 - Put some basic rule sets in the `main.css` file for example,
     ```css
@@ -127,7 +134,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     When using `{{}}`, this makes sure that the return type of the arguments is a string. This is why it's used to slot in the path of a file in string form. 
 - The same applies if you were trying to link a JavaScript file. It would be `filename='js/main.js'` instead.
 
-### 1.3.5. Database connectivity
+### 3.5. Database connectivity
 - Import SQLAlchemy into the python app. The import statements now are,
     ```py
     from flask import Flask, render_template, url_for
@@ -141,7 +148,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     ```py
     db = SQLAlchemy(app)
     ```
-### 1.3.6. Creating the database model
+### 3.6. Creating the database model
 - Make a class to instantiate a database. Should look something like this,
 
     ```py
@@ -171,7 +178,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
 - In Python, `__repr__` is a special method used to represent a class’s objects as a string. `__repr__` is called by the repr() built-in function. You can define your own string representation of your class objects using the `__repr__` method.
 - [This blog post](https://www.educative.io/answers/what-is-the-repr-method-in-python) is a good resource to learn about the `__repr__` method in Python.
 
-### 1.3.7. Creating the database
+### 3.7. Creating the database
 - Head to the terminal. Make sure your env is activated.
 - Start an interactive Python shell. Type in `python` or `py` to start up an interpreter prompt.
 - To create the database, type in, 
@@ -183,8 +190,8 @@ Use these notes by reading the bit that corresponds to the step you're on in the
 - On running the second command, a new `__pycache__` folder will be created along with our database element.
 - You no longer need the terminal since the database has been setup following the above steps.
 
-## 1.4. Creating the Task Master app
-### Creating the basic layout
+## 4. Creating the Task Master app
+### 4.1. Creating the basic layout
 - Write a new `index.html` file with a header and a table.
 - This is the basic structure of the table we're creating. 
     ```html
@@ -232,7 +239,7 @@ Use these notes by reading the bit that corresponds to the step you're on in the
     This form takes two inputs, one is the actual content and the second is a submit. The form ends up like this,
     ```html
     <form action="/" method="POST">
-        <input type="text" name="Content" id="content">
+        <input type="text" name="content" id="content">
         <input type="submit" value="Add task">
     </form>
     ```
@@ -252,37 +259,103 @@ Use these notes by reading the bit that corresponds to the step you're on in the
         else:
             return render_template('index.html')
     ```
-### Adding the logic to create a task
+### 4.2. Creating a task
 - Create a request variable and passing in the id of the input from the form. Then use that request variable to create a new object of the database model.
 - This object becomes our task which we will then push to the database.
-- The code implementing this logic looks like,
-```py
-# If the submit button on the form is pressed
+#### 4.2.1. Programming the logic
+- Check if the button was pressed on the site, i.e., the method employed is the *post* method.
+    ```py
     if request.method == 'POST':
-        # Pass in the id of the input to extract
-        taskContent = request.form['content']
+    ```
+- Extracting the data from the form in the table. The `content` is in reference to the `name` of the input field and **not** `id`,
+    ```py
+    taskContent = request.form['content']
+    ```
+- Creating a new task with the extracted data
+    ```py
+    newTask = Model(content=taskContent)
+    ```
+- Updating the database
+    ```py
+    # Pushing the new task created to the database
+    try:
+        # Look familiar? This code pushes data to our database
+        db.session.add(newTask)
+        db.session.commit()
         
-        # Create an object of the table having content as the extracted content above
-        newTask = Model(content=taskContent)
-        
-        # Pushing the new task created to the database
-        try:
-            # Look familiar? This code pushes data to our database
-            db.session.add(newTask)
-            db.session.commit()
-            
-            # Remember to import redirect back to the index page
-            return redirect('/')
-        except:
-            # This should never fail ideally
-            return 'There was an issue adding your task to the database.'
+        # Remember to import redirect back to the index page
+        return redirect('/')
+    except:
+        # This should never fail ideally
+        return 'There was an issue adding your task to the database.'
+    ```
+    We write `return redirect('/')` so that the index page is displayed after updating the database. Also, update the import statement to include `redirect` like so,
+    ```py
+    from flask import Flask, render_template, request, redirect
+    ```
+- If the submit button is never pressed, this means that the method employed is the *get* method. We're just reading the page and nothing else. This method is called by default.
+- When we're using the *get* method, we just sort all the tasks by the most recently created and displaying them.
+    ```py
     else:
         # This looks at all the database contents and returns them in the order of their creation
         tasks = Model.query.order_by(Model.dateCreated).all()
-        # tasks = Model.query.order_by(Model.dateCreated).first()
         
         # Passing the tasks variable into the render_template() function
         return render_template('index.html', tasks=tasks)
+    ```
+- If instead, you want to display the most recent task created, use,
+    ```py
+    tasks = Model.query.order_by(Model.dateCreated).first()
+    ```
+#### 4.2.2. Putting it all together
+```py
+# If the submit button on the form is pressed
+if request.method == 'POST':
+    # Pass in the id of the input to extract
+    taskContent = request.form['content']
+    
+    # Create an object of the table having content as the extracted content above
+    newTask = Model(content=taskContent)
+    
+    # Pushing the new task created to the database
+    try:
+        # Look familiar? This code pushes data to our database
+        db.session.add(newTask)
+        db.session.commit()
+        
+        # Remember to import redirect back to the index page
+        return redirect('/')
+    except:
+        # This should never fail ideally
+        return 'There was an issue adding your task to the database.'
+else:
+    # This looks at all the database contents and returns them in the order of their creation
+    tasks = Model.query.order_by(Model.dateCreated).all()
+    # tasks = Model.query.order_by(Model.dateCreated).first()
+    
+    # Passing the tasks variable into the render_template() function
+    return render_template('index.html', tasks=tasks)
 ```
-#### Breaking it down
-- Extracting the data from the form in the table
+
+### 4.3. Making the table dynamic
+- Adding Jinja2 syntax to our table in `index.html` to show a row for each task in the database. We use a for loop to iterate through the tasks in the task list. This task list comes from the above code passing `tasks` to `render_template()`. 
+
+- The updated row dynamically becomes,
+    ```html
+    {% for task in tasks %}
+        <tr>
+            <!-- First column for content of the task -->
+            <td>{{ task.content }}</td>
+            <!-- Second column for the date created -->
+            <!-- date() ensures that it's in the intended format -->
+            <td>{{ task.dateCreated.date() }}</td>
+            <td>
+                <!-- Create a link -->
+                <a href="">Delete</a>
+                <br>
+                <a href="">Update</a>
+            </td>
+        </tr>
+    {% endfor %}
+    ```
+- It was at this point that the `task.content` field refers to the `name` of the input and not the `id`.
