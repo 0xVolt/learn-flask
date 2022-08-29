@@ -362,17 +362,29 @@ else:
  
 ### 1.4.4. Adding deletion functionality
 - We query the database on the `id` field and not the name field like we did before. This is because the `id` field is our primary key. 
-```py
-# By default, the method list consists of 'GET'
-@app.route('/delete/<int:id>')
-def delete(id):
-    taskToDelete = Model.query.get_or_404(id)
-    
-    try:
-        db.session.delete(taskToDelete)
-        db.session.commit()
+- We set the routes for these pages to be dynamic according to the `id` of the task.
+- The route then becomes,
+    ```py
+    # By default, the method list consists of 'GET'
+    @app.route('/delete/<int:id>')
+    ```
+- Defining the delete function right after as,
+    ```py
+    def delete(id):
+        # More on this after
+        taskToDelete = Model.query.get_or_404(id)
         
-        return redirect('/')
-    except:
-        return 'There was an issue deleting that task.'
-```
+        try:
+            db.session.delete(taskToDelete)
+            db.session.commit()
+            
+            return redirect('/')
+        except:
+            return 'There was an issue deleting that task.'
+    ```
+- Here,
+    ```py
+    taskToDelete = Model.query.get_or_404(id)
+    ```
+    queries the database to find the task with the passed `id` or to return a `404` error if not found.
+    The rest of the function's code has been discussed before and an explanation would be redundant. 
