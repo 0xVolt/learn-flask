@@ -361,3 +361,18 @@ else:
 - It was at this point that the `task.content` field refers to the `name` of the input and not the `id`.
  
 ### 1.4.4. Adding deletion functionality
+- We query the database on the `id` field and not the name field like we did before. This is because the `id` field is our primary key. 
+```py
+# By default, the method list consists of 'GET'
+@app.route('/delete/<int:id>')
+def delete(id):
+    taskToDelete = Model.query.get_or_404(id)
+    
+    try:
+        db.session.delete(taskToDelete)
+        db.session.commit()
+        
+        return redirect('/')
+    except:
+        return 'There was an issue deleting that task.'
+```
