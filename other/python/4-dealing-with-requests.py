@@ -11,14 +11,14 @@ db = SQLAlchemy(app)
 class Model(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
-    
+
     # This is always set automatically and never manually since it has a default field
     dateCreated = db.Column(db.DateTime, default=datetime.utcnow)
-    
+
     # Creating a repr function to represent each task (object) as a string
     def __repr__(self):
         retString = 'Task #{}'.format(self.id)
-        
+
         return retString
 
 
@@ -29,7 +29,7 @@ def index():
         pass
     else:
         return render_template('index.html')
-        
+
 
 if __name__ == '__main__':
     app.run(debug=True)

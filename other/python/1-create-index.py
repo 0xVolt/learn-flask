@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     string = "Khakhras don't hold their own against peanut butter."
-    
+
     return string
 
 # Setting up the main function
